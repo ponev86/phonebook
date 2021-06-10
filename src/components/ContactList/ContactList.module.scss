@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.contactList {
+  margin-top: 144px;
+  height: calc(100vh - 144px);
+  transition: all 0.3s linear;
+
+  &_scrolled {
+    margin-top: 90px;
+    height: calc(100vh - 90px);
+  }
+
+  &__inner {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.2rem;
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}

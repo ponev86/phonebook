@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+.search {
+  display: flex;
+  overflow: hidden;
+
+  &__input {
+    height: 35px;
+  }
+
+  &__button {
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &_hide {
+      width: 0;
+      padding: 8px 0;
+      font-size: 0;
+      opacity: 0;
+    }
+  }
+}

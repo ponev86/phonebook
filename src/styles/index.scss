@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'fonts';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: $gray-100;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 34px;
+  color: $gray-500;
+  margin: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: $sm) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  @media (min-width: $sm) {
+    max-width: $width-sm;
+  }
+
+  @media (min-width: $md) {
+    max-width: $width-md;
+  }
+
+  @media (min-width: $lg) {
+    max-width: $width-lg;
+  }
+
+  @media (min-width: $xl) {
+    max-width: $width-xl;
+  }
+
+  @media (min-width: $xxl) {
+    max-width: $width-xxl;
+  }
+}

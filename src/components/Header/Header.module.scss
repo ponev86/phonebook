@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  box-shadow: 0px 10px 5px -7px $black-150;
+
+  &__inner {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    transition: all 0.3s linear;
+
+    &_scrolled {
+      padding-top: 8px;
+      padding-bottom: 12px;
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    transition: all 0.3s linear;
+
+    &_scrolled {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+  }
+
+  &__add {
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    border: 0;
+    position: absolute;
+    top: 7px;
+    right: 0;
+
+    @media (max-width: $sm) {
+      right: 10px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.input {
+  padding: 8px 16px;
+  outline: none;
+  border-radius: 6px;
+  border: 1px solid $gray-400;
+  font-family: 'Montserrat', sans-serif;
+  color: $gray-900;
+
+  &_search {
+    width: 100%;
+
+    &:focus {
+      border-color: $gray-500;
+    }
+  }
+}
