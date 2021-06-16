@@ -32,7 +32,7 @@
     }
   }
 
-  &__add {
+  &__addLink {
     width: 30px;
     height: 30px;
     padding: 0 !important;
@@ -40,8 +40,12 @@
     position: absolute;
     top: 7px;
     right: 0;
+  }
+}
 
-    @media (max-width: $sm) {
+@media (max-width: $sm) {
+  .header {
+    &__addLink {
       right: 10px;
     }
   }

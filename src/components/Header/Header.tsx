@@ -19,7 +19,10 @@ const Header: React.FC = () => {
           isScrolled && styles.header__inner_scrolled
         )}
       >
-        <Button buttonType={ButtonType.UNFILLED} className={styles.header__add}>
+        <Button
+          buttonType={ButtonType.UNFILLED}
+          className={styles.header__addLink}
+        >
           <Icon name="add" />
         </Button>
 

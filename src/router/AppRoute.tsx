@@ -17,6 +17,7 @@ const AppRouter: React.FC = () => {
         <Switch>
           <Route exact path={Paths.contacts} component={Contacts} />
           <Route exact path={`${Paths.view}/:contactId`} component={View} />
+          <Route exact path={`${Paths.edit}/:contactId`} component={View} />
           <Redirect to="/" />
         </Switch>
       </Router>

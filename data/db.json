@@ -6,7 +6,47 @@
       "surname": "Багров",
       "phone": "+7(999)111-22-33",
       "email": "d.bagrov@mail.ru",
-      "avatar": "danila.jpg"
+      "avatar": "https://iili.io/n4vZCB.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Виктор",
+      "surname": "Багров",
+      "phone": "+7(999)333-11-44",
+      "email": "tatarin@mail.ru",
+      "avatar": "https://iili.io/n48zuf.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Немец",
+      "surname": "",
+      "phone": "+7(123)456-78-90",
+      "email": "nemec@mail.ru",
+      "avatar": "https://iili.io/n4S7xR.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Фашист",
+      "surname": "",
+      "phone": "+7(111)222-33-44",
+      "email": "fashist@mail.ru",
+      "avatar": "https://iili.io/n4SaiN.png"
+    },
+    {
+      "id": 5,
+      "name": "Круглый",
+      "surname": "",
+      "phone": "+7(111)111-11-11",
+      "email": "circle@mail.ru",
+      "avatar": ""
+    },
+    {
+      "id": 6,
+      "name": "Ирина",
+      "surname": "Салтыкова",
+      "phone": "+7(888)222-33-15",
+      "email": "i.saltukova@mail.ru",
+      "avatar": ""
     }
   ]
 }

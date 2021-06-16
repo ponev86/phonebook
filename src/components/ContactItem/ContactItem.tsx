@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ContactItem.module.scss';
-import danila from '../../assets/avatars/danila.jpg';
 import { Paths } from '../../router/constants';
 
 interface IContactItemProps {
   id: number;
   name: string;
-  surname: string;
+  surname?: string;
   phone: string;
   avatar?: string;
 }
@@ -24,13 +23,13 @@ const ContactItem: React.FC<IContactItemProps> = ({
       {avatar ? (
         <img
           className={styles.contactItem__avatar}
-          src={danila}
+          src={avatar}
           alt={`${name} ${surname}`}
         />
       ) : (
         <span className={styles.contactItem__noPhoto}>
           {name[0]}
-          {surname[0]}
+          {surname?.[0]}
         </span>
       )}
       <span className={styles.contactItem__dataWrapper}>

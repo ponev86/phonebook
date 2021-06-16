@@ -25,6 +25,7 @@ const Input: React.FC<IInputProps> = ({
   ...rest
 }) => {
   const inputStyle = {
+    [InputType.INPUT]: styles.input,
     [InputType.SEARCH]: styles.input_search
   };
 
@@ -38,11 +39,9 @@ const Input: React.FC<IInputProps> = ({
   return (
     <>
       {label && (
-        <label htmlFor={id} className={styles.inputWrapper__label}>
+        <label htmlFor={id} className={styles.label}>
           {label}
-          {isRequired && (
-            <span className={styles.inputWrapper__required}>*</span>
-          )}
+          {isRequired && <span className={styles.required}>*</span>}
         </label>
       )}
 

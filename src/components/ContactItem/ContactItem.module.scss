@@ -47,8 +47,6 @@
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* TODO max-width for all screens*/
-    max-width: 215px;
     overflow: hidden;
     font-size: 18px;
     font-weight: 700;
@@ -60,5 +58,45 @@
     font-family: 'Rubik', sans-serif;
     font-size: 14px;
     color: $gray-500;
+  }
+}
+
+@media (min-width: $sm) {
+  .contactItem {
+    &__name {
+      max-width: unset;
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .contactItem {
+    &__name {
+      max-width: 253px;
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .contactItem {
+    &__name {
+      max-width: 210px;
+    }
+  }
+}
+
+@media (min-width: $xl) {
+  .contactItem {
+    &__name {
+      max-width: 275px;
+    }
+  }
+}
+
+@media (min-width: $xxl) {
+  .contactItem {
+    &__name {
+      max-width: 215px;
+    }
   }
 }
