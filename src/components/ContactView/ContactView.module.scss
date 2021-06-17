@@ -5,45 +5,61 @@
 
   &__inner {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  &__field {
-    flex: 45% 0 0;
+  &__dataWrapper {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    border: 1px solid $gray-300;
+    border-radius: 6px;
+    background-color: $white;
+    padding: 10px 15px;
+    flex: 1 0;
+    margin: 0 10px;
+  }
+
+  &__title {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+
+  &__value {
+    min-width: 200px;
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 }
 
-@media (max-width: $lg) {
+@media (max-width: $md) {
   .contactView {
-    &__field {
-      flex: 100% 0 0;
+    &__inner {
+      flex-direction: column;
+    }
 
-      label {
-        width: 20%;
-      }
+    &__dataWrapper {
+      margin: 0 10px 10px;
     }
   }
 }
 
 @media (max-width: $sm) {
   .contactView {
-    &__field {
-      flex: 100% 0 0;
+    &__dataWrapper {
+      margin: 0 0 10px;
       flex-wrap: wrap;
-      border-bottom: 1px solid $gray-400;
+    }
 
-      &:last-child {
-        border-bottom: 0;
-      }
-
-      label {
-        width: 100%;
-        margin-bottom: 5px;
-      }
+    &__value {
+      min-width: unset;
     }
   }
 }

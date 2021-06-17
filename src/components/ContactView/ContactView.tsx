@@ -1,55 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './ContactView.module.scss';
-import Input from '../Input';
-import { InputType } from '../Input/types';
 import { IContact } from '../../store/contact/types';
-import { useEffect } from 'react';
+import Loader from '../Loader';
 
 interface IHeaderViewProps {
   contactItem?: IContact;
+  isLoading: boolean;
 }
 
-const ContactView: React.FC<IHeaderViewProps> = ({ contactItem }) => {
-  const [phone, setPhone] = useState(contactItem?.phone);
-  const [email, setEmail] = useState(contactItem?.email);
-
-  useEffect(() => {
-    setPhone(contactItem?.phone);
-    setEmail(contactItem?.email);
-  }, [contactItem]);
-
-  const onChangePhoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
-  };
-
-  const onChangeEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
+const ContactView: React.FC<IHeaderViewProps> = ({
+  contactItem,
+  isLoading
+}) => {
   return (
     <main>
       <div className={styles.contactView}>
-        <div className={classNames('container', styles.contactView__inner)}>
-          <div className={styles.contactView__field}>
-            <Input
-              inputType={InputType.INPUT}
-              disabled={true}
-              label="Телефон:"
-              value={phone}
-              onChange={onChangePhoneHandler}
-            />
+        {isLoading ? (
+          <div className={styles.contactView__loader}>
+            <Loader />
           </div>
-          <div className={styles.contactView__field}>
-            <Input
-              inputType={InputType.INPUT}
-              disabled={true}
-              label="Email:"
-              value={email}
-              onChange={onChangeEmailHandler}
-            />
+        ) : (
+          <div className={classNames('container', styles.contactView__inner)}>
+            <div className={styles.contactView__dataWrapper}>
+              <div className={styles.contactView__title}>Телефон:</div>
+              <div className={styles.contactView__value}>
+                {contactItem?.phone}
+              </div>
+            </div>
+            <div className={styles.contactView__dataWrapper}>
+              <div className={styles.contactView__title}>Email:</div>
+              <div className={styles.contactView__value}>
+                {contactItem?.email}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   );

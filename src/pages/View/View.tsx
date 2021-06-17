@@ -15,7 +15,9 @@ interface ParamTypes {
 const View: React.FC = () => {
   const { contactId } = useParams<ParamTypes>();
   const dispatch = useDispatch();
-  const { contactItem } = useSelector((state: IState) => state.contactReducer);
+  const { contactItem, isLoading } = useSelector(
+    (state: IState) => state.contactReducer
+  );
 
   useEffect(() => {
     dispatch(getContactById(+contactId));
@@ -24,7 +26,7 @@ const View: React.FC = () => {
   return (
     <>
       <HeaderView contactItem={contactItem} />
-      <ContactView contactItem={contactItem} />
+      <ContactView contactItem={contactItem} isLoading={isLoading} />
     </>
   );
 };
