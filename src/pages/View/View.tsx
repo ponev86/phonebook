@@ -1,7 +1,6 @@
 import React from 'react';
 import HeaderView from '../../components/HeaderView';
 import ContactView from '../../components/ContactView';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../../store/interfaces';
 import { useParams } from 'react-router-dom';

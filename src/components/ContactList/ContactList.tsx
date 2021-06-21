@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { getContacts } from '../../store/contact/actions';
 import { IContact } from '../../store/contact/types';
 import Loader from '../Loader';
+import { sortingAlpha } from '../../helpers/functions';
 
 const ContactList: React.FC = () => {
   const isScrolled = useWindowScrolled();
@@ -20,6 +21,8 @@ const ContactList: React.FC = () => {
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
+
+  const sortingContacts = sortingAlpha(contacts);
 
   return (
     <main>
@@ -35,15 +38,15 @@ const ContactList: React.FC = () => {
           </div>
         )}
 
-        {!contacts.length && !isLoading && (
+        {!sortingContacts.length && !isLoading && (
           <div className={styles.contactList__empty}>
             <h3>Не найдено</h3>
           </div>
         )}
 
-        {contacts.length && !isLoading ? (
+        {sortingContacts.length && !isLoading ? (
           <div className={classNames('container', styles.contactList__inner)}>
-            {contacts.map((itemContact: IContact) => {
+            {sortingContacts.map((itemContact: IContact) => {
               return (
                 <ContactItem
                   key={itemContact.id}

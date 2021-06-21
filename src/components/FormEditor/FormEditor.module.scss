@@ -1,0 +1,171 @@
+@import '../../styles/variables';
+
+.header {
+  background-color: $white;
+  box-shadow: 0px 10px 5px -7px $black-150;
+
+  &__inner {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__backLink,
+  &__applyButton {
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    border: 0;
+    position: absolute;
+    top: 7px;
+  }
+
+  &__backLink {
+    left: 0;
+  }
+
+  &__applyButton {
+    right: 0;
+    color: $green;
+
+    &:disabled {
+      color: $gray-500;
+    }
+  }
+
+  &__imageWrapper {
+    position: relative;
+    width: 160px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__nameAction {
+    font-size: 14px;
+    color: $blue-dark;
+    margin-top: 10px;
+  }
+
+  &__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $gray-500;
+    object-fit: cover;
+  }
+
+  &__noPhoto {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $gray-500;
+    background-color: $gray-700;
+    font-size: 26px;
+    font-weight: 700;
+    color: $white;
+    text-transform: uppercase;
+  }
+
+  &__resetImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    padding: 0 !important;
+  }
+
+  &__fields {
+    margin-bottom: 10px;
+  }
+}
+
+.main {
+  padding: 30px 0;
+
+  &__inner {
+    display: flex;
+    justify-content: space-around;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: $sm) {
+  .header {
+    &__avatar,
+    &__noPhoto {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .header {
+    &__imageWrapper {
+      width: 190px;
+    }
+
+    &__avatar,
+    &__noPhoto {
+      width: 150px;
+      height: 150px;
+    }
+
+    &__noPhoto {
+      font-size: 60px;
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .header {
+    &__imageWrapper {
+      width: 240px;
+    }
+
+    &__avatar,
+    &__noPhoto {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
+
+@media (min-width: $xl) {
+  .header {
+    &__avatar,
+    &__noPhoto {
+      width: 250px;
+      height: 250px;
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .header {
+    &__backLink {
+      left: 10px;
+    }
+
+    &__applyButton {
+      right: 10px;
+    }
+  }
+}

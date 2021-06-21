@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import useWindowScrolled from '../../helpers/hooks/useWindowScrolled';
 import Search from '../Search';
 import Button from '../Button';
@@ -8,7 +9,12 @@ import classNames from 'classnames';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const history = useHistory();
   const isScrolled = useWindowScrolled();
+
+  const onAddHandler = () => {
+    history.push('add');
+  };
 
   return (
     <header className={styles.header}>
@@ -22,6 +28,7 @@ const Header: React.FC = () => {
         <Button
           buttonType={ButtonType.UNFILLED}
           className={styles.header__addLink}
+          onClick={onAddHandler}
         >
           <Icon name="add" />
         </Button>

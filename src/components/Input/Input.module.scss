@@ -11,6 +11,9 @@
   font-weight: 400;
   font-size: 18px;
   width: 100%;
+  &:focus {
+    border-color: $gray-700;
+  }
 
   &:disabled {
     border-color: transparent;
@@ -24,6 +27,14 @@
     &:focus {
       border-color: $gray-500;
     }
+  }
+
+  &_valid {
+    border-color: $gray-400;
+  }
+
+  &_invalid {
+    border-color: $red;
   }
 }
 

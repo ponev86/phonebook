@@ -29,6 +29,7 @@ const Search: React.FC = () => {
         onFocus={onFocusHandler}
         value={value}
         onChange={onChangeHandler}
+        isValid={null}
       />
       <Button
         buttonType={ButtonType.UNFILLED}

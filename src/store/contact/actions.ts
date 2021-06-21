@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux';
 import { CONTACTS_URL } from '../../helpers/api';
+import { convertBase64 } from '../../helpers/functions';
+import { IState } from '../interfaces';
 import { ContactActions, ContactActionTypes, IContact } from './types';
 
 const contactRequestAction = (): ContactActions => ({
@@ -44,8 +46,32 @@ export const getContactById =
 
       dispatch(getContactByIdAction(data));
     } catch (err) {
-      console.log(err);
-
       dispatch(contactErrorAction('Что-то пошло не так. Попробуйте позже!'));
     }
   };
+
+export const addNewContact = (newContact: IContact, file?: File) => async (dispatch: Dispatch<ContactActions>, getState: any) => {
+  try {
+    newContact.avatar = '';
+
+    if (file) {
+      const base64 = await convertBase64(file)
+      newContact.avatar = base64 as string;
+    }
+    
+    await fetch(CONTACTS_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newContact)
+    });
+    
+    dispatch(contactSuccessAction([...getState().contactReducer.contacts, newContact]))
+    
+    
+    
+  } catch (err) {
+    dispatch(contactErrorAction(err));
+  }
+}
