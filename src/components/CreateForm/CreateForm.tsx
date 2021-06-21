@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addNewContact } from '../../store/contact/actions';
+import { IContact } from '../../store/contact/types';
 import { useHistory } from 'react-router-dom';
 import Button from '../Button';
 import { ButtonType } from '../Button/types';
@@ -8,10 +11,7 @@ import { InputType } from '../Input/types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
-import styles from './FormEditor.module.scss';
-import { useDispatch } from 'react-redux';
-import { addNewContact, getContacts } from '../../store/contact/actions';
-import { IContact } from '../../store/contact/types';
+import styles from './CreateForm.module.scss';
 
 interface ISelectImage {
   preview?: string;
@@ -23,10 +23,10 @@ interface FormValues {
   surname: string;
   phone: string;
   email: string;
-  avatar: string;
+  avatar?: string;
 }
 
-const FormEditor: React.FC = () => {
+const CreateForm: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ const FormEditor: React.FC = () => {
 
   const onBackHandler = () => {
     history.push('/');
-  };  
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -63,9 +63,9 @@ const FormEditor: React.FC = () => {
       phone: Yup.string().required().min(4).max(12),
       email: Yup.string().email()
     }),
-    onSubmit: values => {     
+    onSubmit: values => {
       dispatch(addNewContact(values as IContact, selectImage?.file));
-      history.push('/'); 
+      history.push('/');
     }
   });
 
@@ -85,7 +85,9 @@ const FormEditor: React.FC = () => {
             buttonType={ButtonType.UNFILLED}
             className={styles.header__applyButton}
             isSubmit
-            disabled={!formik.touched.name || !!Object.keys(formik.errors).length}
+            disabled={
+              !formik.touched.name || !!Object.keys(formik.errors).length
+            }
           >
             <Icon name="apply" />
           </Button>
@@ -167,4 +169,4 @@ const FormEditor: React.FC = () => {
   );
 };
 
-export default FormEditor;
+export default CreateForm;

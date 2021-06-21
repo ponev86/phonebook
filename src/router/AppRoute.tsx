@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Contacts from '../pages/Contacts';
-import Editor from '../pages/Editor';
+import AddContact from '../pages/AddContact';
 import View from '../pages/View';
 import { Paths } from './constants';
 
@@ -18,9 +18,8 @@ const AppRouter: React.FC = () => {
         <Switch>
           <Route exact path={Paths.contacts} component={Contacts} />
           <Route exact path={`${Paths.view}/:contactId`} component={View} />
-          <Route exact path={`${Paths.add}`}>
-            <Editor />
-          </Route>
+          <Route exact path={`${Paths.add}`} component={AddContact} />
+          {/* <Route exact path={`${Paths.edit}/:contactId`}></Route> */}
           <Redirect to="/" />
         </Switch>
       </Router>

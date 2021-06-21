@@ -5,18 +5,25 @@ import Input from '../Input';
 import { InputType } from '../Input/types';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
+import { useDispatch } from 'react-redux';
+import { changeSearchString } from '../../store/search/actions';
 
 const Search: React.FC = () => {
+  const dispatch = useDispatch();
+  
   const [value, setValue] = useState<string>('');
   const [isHideButton, setIsHideButton] = useState<boolean>(true);
 
   const onFocusHandler = () => setIsHideButton(false);
+
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
+    dispatch(changeSearchString(event.target.value));
     setIsHideButton(!event.target.value.length);
   };
   const onClickHandler = () => {
     setValue('');
+    dispatch(changeSearchString(''));
     setIsHideButton(true);
   };
 

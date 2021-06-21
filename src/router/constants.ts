@@ -1,5 +1,6 @@
 export enum Paths {
   contacts = '/',
   view = '/view',
-  add = '/add'
+  add = '/add',
+  edit = '/edit'
 }

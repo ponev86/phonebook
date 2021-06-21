@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { CONTACTS_URL } from '../../helpers/api';
 import { convertBase64 } from '../../helpers/functions';
-import { IState } from '../interfaces';
 import { ContactActions, ContactActionTypes, IContact } from './types';
 
 const contactRequestAction = (): ContactActions => ({
