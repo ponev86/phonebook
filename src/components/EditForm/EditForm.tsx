@@ -39,10 +39,7 @@ interface IEditProps {
 const EditForm: React.FC<IEditProps> = ({ contactId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const { contactItem, isLoading } = useSelector(
-    (state: IState) => state.contactReducer
-  );
+  const { contactItem } = useSelector((state: IState) => state.contactReducer);
 
   useEffect(() => {
     dispatch(getContactById(contactId));
@@ -95,8 +92,6 @@ const EditForm: React.FC<IEditProps> = ({ contactId }) => {
       history.push('/');
     }
   });
-
-  if (isLoading) return null;
 
   return (
     <form onSubmit={formik.handleSubmit}>
