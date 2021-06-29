@@ -18,7 +18,10 @@ export enum ContactActionTypes {
   CONTACT_REQUEST = 'CONTACT_REQUEST',
   CONTACT_SUCCESS = 'CONTACT_SUCCESS',
   CONTACT_ERROR = 'CONTACT_ERROR',
-  GET_CONTACT_ITEM = 'GET_CONTACT_ITEM'
+  GET_CONTACT_ITEM = 'GET_CONTACT_ITEM',
+  ADD_CONTACT = 'ADD_CONTACT',
+  EDIT_CONTACT = 'EDIT_CONTACT',
+  REMOVE_CONTACT = 'REMOVE_CONTACT'
 }
 
 interface IContactRequestAction {
@@ -40,8 +43,26 @@ interface IContactGetItemAction {
   payload: IContact;
 }
 
+interface IContactAddAction {
+  type: ContactActionTypes.ADD_CONTACT;
+  payload: IContact;
+}
+
+interface IContactRemoveAction {
+  type: ContactActionTypes.REMOVE_CONTACT;
+  payload: number;
+}
+
+interface IContactEditAction {
+  type: ContactActionTypes.EDIT_CONTACT;
+  payload: IContact;
+}
+
 export type ContactActions =
   | IContactRequestAction
   | IContactSuccessAction
   | IContactErrorsAction
-  | IContactGetItemAction;
+  | IContactGetItemAction
+  | IContactAddAction
+  | IContactRemoveAction 
+  | IContactEditAction;

@@ -6,8 +6,11 @@
   cursor: pointer;
 
   &_primary {
-    &:hover {
-    }
+    border: 1px solid;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   &_unfilled {

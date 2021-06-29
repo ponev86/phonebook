@@ -22,6 +22,21 @@ const getContactByIdAction = (payload: IContact): ContactActions => ({
   payload
 });
 
+const addContactAction = (payload: IContact): ContactActions => ({
+  type: ContactActionTypes.ADD_CONTACT,
+  payload
+});
+
+const removeContactAction = (payload: number): ContactActions => ({
+  type: ContactActionTypes.REMOVE_CONTACT,
+  payload
+});
+
+const editContactAction = (payload: IContact): ContactActions => ({
+  type: ContactActionTypes.EDIT_CONTACT,
+  payload
+});
+
 export const getContacts = () => async (dispatch: Dispatch<ContactActions>) => {
   dispatch(contactRequestAction());
   try {
@@ -49,28 +64,82 @@ export const getContactById =
     }
   };
 
-export const addNewContact = (newContact: IContact, file?: File) => async (dispatch: Dispatch<ContactActions>, getState: any) => {
-  try {
-    newContact.avatar = '';
+export const addContact =
+  (newContact: IContact, file?: File) =>
+  async (dispatch: Dispatch<ContactActions>) => {
+    try {
+      newContact.avatar = '';
 
-    if (file) {
-      const base64 = await convertBase64(file)
-      newContact.avatar = base64 as string;
+      if (file) {
+        const base64 = await convertBase64(file);
+        newContact.avatar = base64 as string;
+      }
+
+      const response = await fetch(CONTACTS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newContact)
+      });
+
+      const addedContact = await response.json();
+
+      dispatch(addContactAction(addedContact));
+    } catch (err) {
+      dispatch(contactErrorAction(err));
     }
-    
-    await fetch(CONTACTS_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newContact)
-    });
-    
-    dispatch(contactSuccessAction([...getState().contactReducer.contacts, newContact]))
-    
-    
-    
-  } catch (err) {
-    dispatch(contactErrorAction(err));
-  }
-}
+  };
+
+export const editContact =
+  (contactId: number, editDataContact: IContact, file?: File) =>
+  async (dispatch: Dispatch<ContactActions>) => {
+    try {
+      if (file) {
+        const base64 = await convertBase64(file);
+        editDataContact.avatar = base64 as string;
+      }
+      const response = await fetch(`${CONTACTS_URL}/${contactId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editDataContact)
+      });
+
+      const editedContact = await response.json();
+      dispatch(editContactAction(editedContact));
+    } catch (err) {
+      dispatch(contactErrorAction(err));
+    }
+  };
+
+export const removeContact =
+  (contactId: number) => async (dispatch: Dispatch<ContactActions>) => {
+    try {
+      await fetch(`${CONTACTS_URL}/${contactId}`, {
+        method: 'DELETE'
+      });
+
+      dispatch(removeContactAction(contactId));
+    } catch (err) {
+      dispatch(contactErrorAction(err));
+    }
+  };
+
+export const clearAvatar =
+  (contactId: number) => async (dispatch: Dispatch<ContactActions>) => {
+    try {
+      const response = await fetch(`${CONTACTS_URL}/${contactId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ avatar: '' })
+      });
+      const editedContact = await response.json();
+      dispatch(editContactAction(editedContact));
+    } catch (err) {
+      dispatch(contactErrorAction(err));
+    }
+  };

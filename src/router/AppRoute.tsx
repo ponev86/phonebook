@@ -10,6 +10,7 @@ import Contacts from '../pages/Contacts';
 import AddContact from '../pages/AddContact';
 import View from '../pages/View';
 import { Paths } from './constants';
+import EditContact from '../pages/EditContact';
 
 const AppRouter: React.FC = () => {
   return (
@@ -19,7 +20,11 @@ const AppRouter: React.FC = () => {
           <Route exact path={Paths.contacts} component={Contacts} />
           <Route exact path={`${Paths.view}/:contactId`} component={View} />
           <Route exact path={`${Paths.add}`} component={AddContact} />
-          {/* <Route exact path={`${Paths.edit}/:contactId`}></Route> */}
+          <Route
+            exact
+            path={`${Paths.edit}/:contactId`}
+            component={EditContact}
+          />
           <Redirect to="/" />
         </Switch>
       </Router>

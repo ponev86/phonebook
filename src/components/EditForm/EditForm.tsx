@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../store/contact/actions';
-import { IContact } from '../../store/contact/types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  clearAvatar,
+  editContact,
+  getContactById,
+  removeContact
+} from '../../store/contact/actions';
 import { useHistory } from 'react-router-dom';
 import Button from '../Button';
 import { ButtonType } from '../Button/types';
@@ -11,7 +15,9 @@ import { InputType } from '../Input/types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
-import styles from './CreateForm.module.scss';
+import styles from './EditForm.module.scss';
+import { IContact } from '../../store/contact/types';
+import { IState } from '../../store/interfaces';
 
 interface ISelectImage {
   preview?: string;
@@ -26,11 +32,26 @@ interface FormValues {
   avatar?: string;
 }
 
-const CreateForm: React.FC = () => {
+interface IEditProps {
+  contactId: number;
+}
+
+const EditForm: React.FC<IEditProps> = ({ contactId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [selectImage, setSelectImage] = useState<ISelectImage>();
+  const { contactItem, isLoading } = useSelector(
+    (state: IState) => state.contactReducer
+  );
+
+  useEffect(() => {
+    dispatch(getContactById(contactId));
+  }, [dispatch, contactId]);
+
+  const [selectImage, setSelectImage] = useState<ISelectImage>({
+    preview: contactItem?.avatar,
+    file: undefined
+  });
 
   const onSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.length) {
@@ -44,18 +65,24 @@ const CreateForm: React.FC = () => {
   const onResetImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectImage({});
+    dispatch(clearAvatar(contactId));
   };
 
   const onBackHandler = () => {
     history.push('/');
   };
 
+  const onRemoveContact = () => {
+    dispatch(removeContact(contactId));
+    history.push('/');
+  };
+
   const formik = useFormik({
     initialValues: {
-      name: '',
-      surname: '',
-      phone: '',
-      email: ''
+      name: contactItem?.name,
+      surname: contactItem?.surname,
+      phone: contactItem?.phone,
+      email: contactItem?.email
     } as FormValues,
     validationSchema: Yup.object({
       name: Yup.string().trim().required(),
@@ -64,10 +91,12 @@ const CreateForm: React.FC = () => {
       email: Yup.string().email()
     }),
     onSubmit: values => {
-      dispatch(addContact(values as IContact, selectImage?.file));
+      dispatch(editContact(contactId, values as IContact, selectImage?.file));
       history.push('/');
     }
   });
+
+  if (isLoading) return null;
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -84,10 +113,8 @@ const CreateForm: React.FC = () => {
           <Button
             buttonType={ButtonType.UNFILLED}
             className={styles.header__applyButton}
+            disabled={!!Object.keys(formik.errors).length}
             isSubmit
-            disabled={
-              !formik.touched.name || !!Object.keys(formik.errors).length
-            }
           >
             <Icon name="apply" />
           </Button>
@@ -164,9 +191,18 @@ const CreateForm: React.FC = () => {
             />
           </div>
         </div>
+        <div className={styles.remove}>
+          <Button
+            buttonType={ButtonType.PRIMARY}
+            className={styles.remove__button}
+            onClick={onRemoveContact}
+          >
+            Удалить контакт
+          </Button>
+        </div>
       </div>
     </form>
   );
 };
 
-export default CreateForm;
+export default EditForm;
